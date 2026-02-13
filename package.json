@@ -2,6 +2,6 @@
   "name": "hksd-speech-platform-heroku-build",
   "private": true,
   "scripts": {
-    "heroku-postbuild": "npm --prefix frontend ci && npm --prefix frontend run build"
+    "heroku-postbuild": "npm --prefix frontend ci --include=dev && npm --prefix frontend run build"
   }
 }
