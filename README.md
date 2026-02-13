@@ -135,3 +135,11 @@ npm run build
 - Recommended production env values:
   - `DJANGO_ALLOWED_HOSTS=hksd-speech-platform-385f3de9d301.herokuapp.com`
   - `FRONTEND_BASE_URL=https://hksd-speech-platform-385f3de9d301.herokuapp.com`
+  - `DJANGO_DEBUG=False`
+
+Debug mode on Heroku:
+- Keep `DJANGO_DEBUG=False` by default.
+- To temporarily enable debug for troubleshooting:
+  - `heroku config:set DJANGO_DEBUG=True`
+- To disable it again:
+  - `heroku config:set DJANGO_DEBUG=False`

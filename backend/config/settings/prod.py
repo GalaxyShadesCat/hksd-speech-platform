@@ -3,7 +3,7 @@ from urllib.parse import urlparse
 
 from .base import *  # noqa: F403,F401
 
-DEBUG = False
+DEBUG = os.getenv("DJANGO_DEBUG", "False").lower() in {"1", "true", "yes", "on"}
 HEROKU_APP_HOST = "hksd-speech-platform-385f3de9d301.herokuapp.com"
 
 
@@ -36,8 +36,7 @@ else:
         }
     }
 
-if not ALLOWED_HOSTS:  # noqa: F405
-    ALLOWED_HOSTS = [HEROKU_APP_HOST]
+ALLOWED_HOSTS = list(dict.fromkeys([*ALLOWED_HOSTS, HEROKU_APP_HOST]))  # noqa: F405
 
 FRONTEND_BASE_URL = os.getenv("FRONTEND_BASE_URL", f"https://{HEROKU_APP_HOST}")
 
