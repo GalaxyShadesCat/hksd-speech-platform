@@ -127,7 +127,7 @@ npm run build
 ## 8. Production/deployment note (Heroku)
 
 - `Procfile` is included with:
-  - `release: cd backend && python manage.py migrate`
+  - `release: cd backend && python manage.py migrate && python manage.py collectstatic --noinput`
   - `web: cd backend && gunicorn config.wsgi:application`
 - In production, set `DJANGO_SETTINGS_MODULE=config.settings.prod`.
 - Ensure `DATABASE_URL` is set to your Heroku Postgres URL.
@@ -143,3 +143,15 @@ Debug mode on Heroku:
   - `heroku config:set DJANGO_DEBUG=True`
 - To disable it again:
   - `heroku config:set DJANGO_DEBUG=False`
+
+Heroku buildpacks for full-stack deploy:
+- This repo now includes a root `package.json` with `heroku-postbuild` that runs:
+  - `npm --prefix frontend ci`
+  - `npm --prefix frontend run build`
+- Set Heroku buildpacks in this order:
+  - `heroku buildpacks:clear`
+  - `heroku buildpacks:add --index 1 heroku/nodejs`
+  - `heroku buildpacks:add --index 2 heroku/python`
+
+Why this matters:
+- If `frontend/dist/index.html` is not generated during build, `/` falls back to a plain backend response (`HKSD Speech Platform API`) instead of the React app.

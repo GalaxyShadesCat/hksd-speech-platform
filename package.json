@@ -1,0 +1,7 @@
+{
+  "name": "hksd-speech-platform-heroku-build",
+  "private": true,
+  "scripts": {
+    "heroku-postbuild": "npm --prefix frontend ci && npm --prefix frontend run build"
+  }
+}
