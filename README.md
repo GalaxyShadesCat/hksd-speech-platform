@@ -25,12 +25,14 @@ DJANGO_SECRET_KEY=replace-with-a-secure-secret
 DJANGO_DEBUG=True
 DJANGO_ALLOWED_HOSTS=127.0.0.1,localhost
 DATABASE_URL=
+FRONTEND_BASE_URL=http://127.0.0.1:5173
 DJANGO_SETTINGS_MODULE=config.settings.dev
 ```
 
 Notes:
 - For local development, leave `DATABASE_URL` empty to use SQLite.
 - `DJANGO_SETTINGS_MODULE=config.settings.dev` is for local development.
+- `FRONTEND_BASE_URL` is used to build password reset links.
 
 ## 3. Backend local setup (`backend/`)
 
@@ -129,3 +131,7 @@ npm run build
   - `web: cd backend && gunicorn config.wsgi:application`
 - In production, set `DJANGO_SETTINGS_MODULE=config.settings.prod`.
 - Ensure `DATABASE_URL` is set to your Heroku Postgres URL.
+- Production app URL: `https://hksd-speech-platform-385f3de9d301.herokuapp.com/`
+- Recommended production env values:
+  - `DJANGO_ALLOWED_HOSTS=hksd-speech-platform-385f3de9d301.herokuapp.com`
+  - `FRONTEND_BASE_URL=https://hksd-speech-platform-385f3de9d301.herokuapp.com`

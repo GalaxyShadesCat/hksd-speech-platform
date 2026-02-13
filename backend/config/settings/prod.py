@@ -4,6 +4,7 @@ from urllib.parse import urlparse
 from .base import *  # noqa: F403,F401
 
 DEBUG = False
+HEROKU_APP_HOST = "hksd-speech-platform-385f3de9d301.herokuapp.com"
 
 
 def _database_from_url(url: str):
@@ -34,6 +35,11 @@ else:
             "NAME": BASE_DIR / "db.sqlite3",  # noqa: F405
         }
     }
+
+if not ALLOWED_HOSTS:  # noqa: F405
+    ALLOWED_HOSTS = [HEROKU_APP_HOST]
+
+FRONTEND_BASE_URL = os.getenv("FRONTEND_BASE_URL", f"https://{HEROKU_APP_HOST}")
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SESSION_COOKIE_SECURE = True
