@@ -1,3 +1,5 @@
+"""Base Django settings shared across environments."""
+
 import os
 from pathlib import Path
 
@@ -72,7 +74,7 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_DIRS = [PROJECT_ROOT / "frontend" / "dist" / "assets"]
+STATICFILES_DIRS = [PROJECT_ROOT / "frontend" / "dist"]
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
